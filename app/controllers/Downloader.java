@@ -19,14 +19,14 @@ public class Downloader extends Job {
 	private static Date time = new Date();;
 	private static long counter = 0;
 	
-	public static boolean isRunning = true;
+	public static boolean isRunning = false;
 	
 	public static String getStatus() {
 		return time.toLocaleString() + "\nCounter : " + counter + "\n\n" + data; 
 	}
 
 	public void doJob() {
-		while (isRunning) {
+		while (isRunning) {			
 			try {
 				HttpResponse res = WS.url("http://192.168.1.40:9101/republish")
 						.get();

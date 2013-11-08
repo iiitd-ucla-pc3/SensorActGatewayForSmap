@@ -31,3 +31,10 @@ play.exceptions.TemplateNotFoundException: Template not found : data, ata
 	at Invocation.HTTP Request(Play!)
 21:06:05,986 INFO  ~ sadfafdasfdasdfas
 21:07:00,374 INFO  ~ sadfafdasfdasdfas  SAFDADF
+22:18:20,301 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+22:18:21,093 WARN  ~ You're running Play! in DEV mode
+22:18:21,231 ERROR ~ Could not bind on port 9010
+22:18:41,430 FATAL ~ Cannot read application.conf
+22:23:23,071 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+22:23:23,799 WARN  ~ You're running Play! in DEV mode
+22:23:23,905 ERROR ~ Could not bind on port 9010

@@ -24,7 +24,11 @@ public class Application extends Controller {
 
     public static void smapGet() {    	
     	if(!Downloader.isRunning) {
+    		System.out.println("Starting downloader..");   		
+    		Downloader.isRunning = true;
     		new Downloader().doJob();
+    		System.out.println("Done..");
+    		renderText("Started the downloader..");
     	}
     	
     	renderText(Downloader.getStatus());
