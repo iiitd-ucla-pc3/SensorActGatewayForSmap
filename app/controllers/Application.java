@@ -10,6 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
@@ -38,8 +39,10 @@ public class Application extends Controller {
 				//DataInputStream dis = new DataInputStream(is);
 				
 				URL url = new URL("http://192.168.1.40:9101/republish");
+				HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+						
 				InputStream in = url.openStream();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String result, line = reader.readLine();
 				result = line;
 				
