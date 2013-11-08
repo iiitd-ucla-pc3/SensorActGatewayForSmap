@@ -1,0 +1,33 @@
+20:57:58,425 INFO  ~ Starting /home/samy/workspace/SensorActGatewayForSmap
+20:57:59,343 WARN  ~ You're running Play! in DEV mode
+20:57:59,563 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+20:59:12,553 INFO  ~ Starting /home/samy/workspace/SensorActGatewayForSmap
+20:59:13,212 WARN  ~ You're running Play! in DEV mode
+20:59:13,313 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+20:59:22,979 INFO  ~ Application 'SensorActGatewayForSmap' is now started !
+21:00:55,570 INFO  ~ Starting /home/samy/workspace/SensorActGatewayForSmap
+21:00:56,258 WARN  ~ You're running Play! in DEV mode
+21:00:56,355 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+21:01:36,274 INFO  ~ Application 'SensorActGatewayForSmap' is now started !
+21:02:13,713 INFO  ~ data, ata
+21:02:55,062 ERROR ~ 
+
+@6g7l82km2
+Internal Server Error (500) for request GET /smap/get
+
+Template not found (In /app/controllers/Application.java around line 22)
+The template data, ata does not exist.
+
+play.exceptions.TemplateNotFoundException: Template not found : data, ata
+	at play.mvc.Controller.renderTemplate(Controller.java:667)
+	at play.mvc.Controller.renderTemplate(Controller.java:640)
+	at play.mvc.Controller.render(Controller.java:695)
+	at controllers.Application.smapGet(Application.java:22)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:548)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:502)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:478)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:473)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	at Invocation.HTTP Request(Play!)
+21:06:05,986 INFO  ~ sadfafdasfdasdfas
+21:07:00,374 INFO  ~ sadfafdasfdasdfas  SAFDADF
