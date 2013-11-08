@@ -31,7 +31,7 @@ public class Downloader extends Job {
 		while (isRunning) {			
 			try {
 				System.out.println("requestion...");
-				HttpResponse res = WS.url("http://192.168.1.40:9101/republish")
+				HttpResponse res = WS.url("http://sensoract.iiitd.edu.in:9010/smap/get")
 						.get();
 				InputStream is = res.getStream();
 
