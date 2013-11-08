@@ -39,10 +39,12 @@ public class Downloader extends Job {
 				InputStream in = url.openStream();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String line = reader.readLine();
-				while((line=reader.readLine())!=null){
-					data = line;
-					counter++;
-					time = new Date();
+				while((line=reader.readLine())!=null){					
+					if(!line.equalsIgnoreCase("\n")) {
+						data = line;
+						counter++;
+						time = new Date();						
+					}
 					LOG.info(line);
 				}			
 			} catch (IOException e) {
