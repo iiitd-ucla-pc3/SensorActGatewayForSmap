@@ -8,8 +8,8 @@ public class SmapHandler {
 
 	public static final Logger LOG = Logger.getLogger(SmapHandler.class.getName());
 	
-	private static String data = null;
-	private static Date time = null;
+	private static String data = "";
+	private static Date time = new Date();;
 	private static long counter = 0;
 	
 	public static void doProcess(String body) {
