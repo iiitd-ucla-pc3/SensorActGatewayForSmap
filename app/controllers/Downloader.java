@@ -10,13 +10,15 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
+import com.sun.swing.internal.plaf.synth.resources.synth;
+
 import play.jobs.Job;
 
 public class Downloader extends Job {
 	
 	public static final Logger LOG = Logger.getLogger(SmapHandler.class.getName());
 	
-	private static String data = "";
+	private static String data = null;
 	private static Date time = new Date();;
 	private static long counter = 0;
 	
@@ -31,7 +33,7 @@ public class Downloader extends Job {
 		isRunning = true;		
 
 		while (isRunning) {			
-			try {				
+			try {
 				System.out.println("requestion...");
 				URL url = new URL("http://192.168.1.40:9101/republish");
 				HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
@@ -40,12 +42,13 @@ public class Downloader extends Job {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String line = reader.readLine();
 				while((line=reader.readLine())!=null){					
-					if(!line.equalsIgnoreCase("\n")) {
+					if(line.length()>10) {
 						data = line;
 						counter++;
-						time = new Date();						
+						time = new Date();
+						LOG.info(data);
 					}
-					LOG.info(line);
+					
 				}			
 			} catch (IOException e) {
 				e.printStackTrace();
