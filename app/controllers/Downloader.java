@@ -1,15 +1,16 @@
 package controllers;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 import play.jobs.Job;
-import play.libs.WS;
-import play.libs.WS.HttpResponse;
 
 public class Downloader extends Job {
 	
@@ -27,24 +28,23 @@ public class Downloader extends Job {
 
 	public void doJob() {		
 		System.out.println("..inside doJob");
-		isRunning = true;
+		isRunning = true;		
+
 		while (isRunning) {			
-			try {
+			try {				
 				System.out.println("requestion...");
-				HttpResponse res = WS.url("http://sensoract.iiitd.edu.in:9010/smap/get")
-						.get();
-				InputStream is = res.getStream();
-
-				DataInputStream dis = new DataInputStream(is);
-				String line = null;
-
-				while ((line = dis.readLine()) != null) {
-					System.out.println(line);
+				URL url = new URL("http://192.168.1.40:9101/republish");
+				HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+						
+				InputStream in = url.openStream();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				String line = reader.readLine();
+				while((line=reader.readLine())!=null){
 					data = line;
 					counter++;
 					time = new Date();
-					LOG.info(line);					
-				}
+					LOG.info(line);
+				}			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
