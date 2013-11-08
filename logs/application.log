@@ -38,3 +38,49 @@ play.exceptions.TemplateNotFoundException: Template not found : data, ata
 22:23:23,071 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
 22:23:23,799 WARN  ~ You're running Play! in DEV mode
 22:23:23,905 ERROR ~ Could not bind on port 9010
+22:35:14,744 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+22:35:15,503 WARN  ~ You're running Play! in DEV mode
+22:35:15,621 ERROR ~ Could not bind on port 9010
+22:36:29,062 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+22:36:29,774 WARN  ~ You're running Play! in DEV mode
+22:36:29,887 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+22:36:36,805 INFO  ~ Application 'SensorActGatewayForSmap' is now started !
+22:36:45,128 INFO  ~ Number of application's worked threads is 8
+22:37:45,189 ERROR ~ java.util.concurrent.ExecutionException: java.util.concurrent.TimeoutException: No response received after 60000
+22:37:45,191 ERROR ~ 
+
+@6g7lkeekm
+Error during job execution (controllers.Downloader)
+
+Execution exception (In /app/controllers/Downloader.java around line 33)
+RuntimeException occured : java.util.concurrent.ExecutionException: java.util.concurrent.TimeoutException: No response received after 60000
+
+play.exceptions.JavaExecutionException: java.util.concurrent.ExecutionException: java.util.concurrent.TimeoutException: No response received after 60000
+	at play.jobs.Job.call(Job.java:155)
+	at play.jobs.Job$1.call(Job.java:66)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.lang.RuntimeException: java.util.concurrent.ExecutionException: java.util.concurrent.TimeoutException: No response received after 60000
+	at play.libs.ws.WSAsync$WSAsyncRequest.get(WSAsync.java:217)
+	at controllers.Downloader.doJob(Downloader.java:33)
+	at play.jobs.Job.doJobWithResult(Job.java:50)
+	at play.jobs.Job.call(Job.java:146)
+	... 8 more
+Caused by: java.util.concurrent.ExecutionException: java.util.concurrent.TimeoutException: No response received after 60000
+	at com.ning.http.client.providers.netty.NettyResponseFuture.get(NettyResponseFuture.java:219)
+	at com.ning.http.client.providers.netty.NettyResponseFuture.get(NettyResponseFuture.java:180)
+	at play.libs.ws.WSAsync$WSAsyncRequest.get(WSAsync.java:214)
+	... 11 more
+Caused by: java.util.concurrent.TimeoutException: No response received after 60000
+	at com.ning.http.client.providers.netty.NettyResponseFuture.get(NettyResponseFuture.java:211)
+	... 13 more
+22:37:58,853 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+22:37:59,596 WARN  ~ You're running Play! in DEV mode
+22:37:59,740 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+22:38:04,413 INFO  ~ Application 'SensorActGatewayForSmap' is now started !
+22:38:07,104 INFO  ~ Number of application's worked threads is 8
