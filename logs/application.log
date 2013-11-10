@@ -4142,3 +4142,7 @@ Caused by: java.util.concurrent.TimeoutException: No response received after 600
 22:59:17,596 WARN  ~ You're running Play! in DEV mode
 22:59:17,715 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
 22:59:26,259 INFO  ~ Application 'SensorActGatewayForSmap' is now started !
+23:21:09,463 INFO  ~ Starting /home/samy/git/SensorActGatewayForSmap
+23:21:10,473 WARN  ~ You're running Play! in DEV mode
+23:21:10,675 INFO  ~ Listening for HTTP on port 9010 (Waiting a first request to start) ...
+23:21:33,938 INFO  ~ Application 'SensorActGatewayForSmap' is now started !

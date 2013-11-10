@@ -46,7 +46,8 @@ public class Downloader extends Job {
 						data = line;
 						counter++;
 						time = new Date();
-						LOG.info(data);
+						SmapHandler.doProcess(data);
+						//LOG.info(data);
 					}
 					
 				}			
