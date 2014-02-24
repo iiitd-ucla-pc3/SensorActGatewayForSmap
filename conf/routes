@@ -5,8 +5,10 @@
 # Home page
 GET     /                                       Application.index
 
-POST    /smap/put                               Application.smapPut
-GET     /smap/get                               Application.smapGet
+GET     /smap/status                            Application.smapStatus
+
+GET     /devicemap/create                       Application.createDeviceMap
+GET     /devicemap/load                         Application.loadDeviceMap
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

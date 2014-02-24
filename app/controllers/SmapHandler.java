@@ -11,6 +11,7 @@ import play.libs.WS;
 import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
 import play.mvc.*;
+import smap.SmapDevice;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -57,10 +58,12 @@ public class SmapHandler {
 			WSRequest wsr = WS.url(url).headers(header).timeout("30s");		
 			HttpResponse trainRes = wsr.put();	
 		} catch (Exception e) {
-			LOG.info("sendtoAnother.. " + url + " " + e.getMessage());
+			LOG.info("sendToSensorAct.. " + url + " " + e.getMessage());
 		}
 	}
 	
+    public static Gson gson = new GsonBuilder().create();            
+
     public static void doProcess(String json) {
 
     	//File f = Play.getFile("./conf/smap.json");
@@ -82,24 +85,36 @@ public class SmapHandler {
 	            //System.out.println(key);
 	            //System.out.println(value.toString());
 	            
-	            StringTokenizer st = new StringTokenizer(key,"/");
-	            
+	            StringTokenizer st = new StringTokenizer(key,"/");	            
 	            String device = st.nextToken();
 	            String sensor = st.nextToken();
 	            String channel = st.nextToken();
 	            
-	            //System.out.println(device+sensor+channel);
-	            
-	            Gson gson = new GsonBuilder().create();            
 	            smap ss = (smap) gson.fromJson(value, smap.class);
+	            
+	            if(Application.deviceMap != null) {	            	
+	            	if(Application.deviceMap.containsKey(ss.uuid)) {
+	            		SmapDevice sd = Application.deviceMap.get(ss.uuid);
+	            		device = sd.Device;
+	            		sensor = sd.Sensor;
+	            		channel = sd.Channel;
+	            	} else {
+	            		LOG.error(ss.uuid + " Not found in device map!" + gson.toJson(ss));
+	            		System.out.println("\n" + new Date().toLocaleString() + " "  + 
+	            				ss.uuid + " Not found in device map!\n" + gson.toJson(ss));
+	            		return;
+	            	}
+	            }
+	            
+	            //System.out.println(device+sensor+channel);
 	            
 	            for(List<Double> l1: ss.Readings) {
 	            	
 	            	epoch = l1.get(0).longValue();
 	            	data = l1.get(1).doubleValue();
 	            	
-	            	System.out.println(epoch);
-	            	System.out.println(data);
+	            	//System.out.println(epoch);
+	            	//System.out.println(data);
 	            	
 	            	sendToSensorAct(key, device, sensor, channel, epoch, data+"");
 	            	//for(String l2: l1) {

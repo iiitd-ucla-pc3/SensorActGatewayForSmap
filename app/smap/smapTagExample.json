@@ -1,0 +1,73 @@
+[
+    {
+        Path: "/FH-RPi02/Meter22/Power",
+        uuid: "b785c4c2-527b-5fc5-86fa-7e650b017c41",
+        Readings: "[[1391714303000, 6.00001082143504e-18]]",
+        Properties: {
+            Timezone: "Asia/Kolkata",
+            UnitofMeasure: "Watts",
+            ReadingType: "double"
+        },
+        Metadata: {
+            LoadLocation: {
+                FlatNumber: "203",
+                Building: "Faculty Housing",
+                Wing: "0",
+                Floor: "2"
+            },
+            Supply: {
+                BillingType: "Residential",
+                Transformer: "Transformer-3",
+                Source: "Utility",
+                BusCoupler: "BusCoupler-1",
+                Voltage: "Low",
+                Panel: "Panel-4"
+            },
+            SourceName: "Faculty Housing",
+            Extra: {
+                FlatNumber: "203",
+                PhysicalParameter: "Power",
+                SupplyType: "Power",
+                LoadType: "Apartments",
+                IP: "192.168.136.7",
+                CommInterface: "Modbus",
+                Sync: "1",
+                MAC: "b8:27:eb:2a:e8:5c",
+                FlatNumber: "203",
+                SubLoadType: "Apartment 203",
+                ControllerName: "FH-RPi02",
+                MeterLevel: "Metadata/Instrument/SupplyType",
+                MeterID: "22",
+                Type: "Power",
+                Wing: "0",
+                Block: "0"
+            },
+            Instrument: {
+                SupplyType: "Power",
+                LoadType: "Apartments",
+                SamplingPeriod: "1 Second",
+                SubLoadType: "Apartment 203",
+                Model: "EM6433",
+                MeterID: "22",
+                Manufacturer: "Schneider Electric"
+            },
+            Location: {
+                Building: "Faculty Housing",
+                FlatNumber: "203",
+                City: "Delhi",
+                Country: "India",
+                Floor: "2",
+                Campus: "IIIT Delhi",
+                Wing: "0"
+            },
+            ControllerLocation: {
+                Building: "Faculty Housing",
+                City: "Delhi",
+                Floor: "2",
+                Country: "India",
+                Wing: "0",
+                Campus: "IIIT Delhi"
+            }
+        }
+    }
+]
