@@ -35,14 +35,28 @@ public class Application extends Controller {
 	public static Map<String, SmapDevice> deviceMap = null;
 	private static File device_map_file = Play.getFile("./conf/devicemap.json");
 	
+	public static boolean isDownloaderStarted = false; 
 	
 	static {
-		//loadDeviceMap();
+		//new Application().loadDeviceMap();
+		try {
+			Type type = new TypeToken<Map<String, SmapDevice>>() {}.getType();
+			FileReader fr = new FileReader(device_map_file);
+			deviceMap = SmapStreamList.gson.fromJson(fr, type);
+			System.out.println("Loaded device map");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void index() throws Exception {
 		//renderJSON(new SmapStreamList().convertToSADevices());
-		renderText("sMAP gateway for SensorAct! \nURLs \n /smap/status \n /devicemap/create \n /devicemap/load");
+		renderText("sMAP gateway for SensorAct! \nURLs " +
+				"\n /smap/start " +
+				"\n /smap/stop " +
+				"\n /smap/status " +
+				"\n /devicemap/create " +
+				"\n /devicemap/load");
 	}
 
 	
@@ -62,32 +76,38 @@ public class Application extends Controller {
 		}
 	}
 
-	public static void loadDeviceMap() {
+	public static void loadDeviceMap() {		
 		try {
 			Type type = new TypeToken<Map<String, SmapDevice>>() {}.getType();
 			FileReader fr = new FileReader(device_map_file);
 			deviceMap = SmapStreamList.gson.fromJson(fr, type);
 			System.out.println("Loaded device map");
-			renderJSON(deviceMap);
 		} catch (Exception e) {
-			renderText(e);
+			e.printStackTrace();
 		}
+		renderJSON(deviceMap);
+	}
+	
+	public static void smapStart() {
+		if (!Downloader.getStatus()) {
+			Downloader.setStatus(true);
+			new Downloader().now();
+			isDownloaderStarted = true;
+		}
+		renderText(Downloader.getStatusMessage());
+	}
+	
+	public static void smapStop() {
+		Downloader.setStatus(false);
+		renderText(Downloader.getStatusMessage());
+		isDownloaderStarted = false;
 	}
 	
 	public static void smapStatus() {
-		
-		if(deviceMap == null) {
-			new Application().loadDeviceMap();
-		}
-		
-		if (!Downloader.isRunning) {
-			System.out.println("Starting downloader..");
-			Downloader.isRunning = true;
-			new Downloader().now();
-			System.out.println("Done..");
-			renderText(Downloader.getStatus());
-			//renderText("Started the downloader..");
-		}
-		renderText(Downloader.getStatus());
+		renderText(Downloader.getStatusMessage());
 	}
+	
+	public static void test(String device, String sensor, String channel) {
+		renderText("tested..." + device + sensor + channel);
+	}	
 }

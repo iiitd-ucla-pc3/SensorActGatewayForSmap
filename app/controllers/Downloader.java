@@ -24,19 +24,30 @@ public class Downloader extends Job {
 	private static Date cur_time = new Date();;
 	private static long counter = 0;
 
-	private static final String smap_republish_url = "http://192.168.1.40:9101/republish";
-	
+	private static final String smap_republish_url = "http://192.168.1.38:9106/republish";	
 	//private static final String smap_republish_url = "http://localhost:9011";
 
-	public static boolean isRunning = false;
+	private static boolean isRunning = false;
 
-	public static String getStatus() {
-		return "Started " + start_time.toLocaleString() + "\nCurrent "
-				+ cur_time.toLocaleString() + "\nCounter : " + counter + "\n\n"
-				+ data;
+	public static String getStatusMessage() {
+		return "Started " + start_time.toLocaleString() + 
+				"\nCurrent " + cur_time.toLocaleString() + 
+				"\nCounter : " + counter +
+				"\nisRunning : " + isRunning +
+				"\n\n" + data;
 	}
 
+	public static synchronized boolean getStatus() {
+		return isRunning;
+	}
+
+	public static synchronized boolean setStatus(boolean status) {
+		isRunning = status;
+		return isRunning;
+	}
+	
 	public void fetchStream() {
+		
 		try {
 			System.out.println("requesting...");
 			URL url = new URL(smap_republish_url);
@@ -47,17 +58,28 @@ public class Downloader extends Job {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					urlConnection.getInputStream()));
 			String line = reader.readLine();
-
+			
 			// inner try-catch to avoid Prematre EOF exception
 			try {
 				while (reader.ready() && (line = reader.readLine()) != null) {
+					
+					if(isRunning == false) {
+						System.out.println(new Date().toLocaleString() + " ..fetchStream... Stoping the downloader.");
+						System.gc();
+						reader.close();
+						urlConnection.disconnect();
+						break;
+					}						
+					
 					if (line.length() > 10) {
 						data = line;
 						counter++;
 						cur_time = new Date();
-						SmapHandler.doProcess(data);
+						new SmapHandler(data).now();
+						//SmapHandler.doProcess(data);
 						// LOG.info(data);
-					}
+					}					
+					LOG.info("Pending in buffer : " + urlConnection.getInputStream().available());
 				}
 			} catch (Exception e) {
 				System.out.println(new Date().toLocaleString() + " "
@@ -71,17 +93,14 @@ public class Downloader extends Job {
 			System.out.println(new Date().toLocaleString() + " "
 					+ e.getMessage());
 			e.printStackTrace(System.out);
-		}
+		}		
+		System.out.println(new Date().toLocaleString() + "..end of fetchStream");
+		isRunning = false;
 	}
 
 	public void doJob() {
-		System.out.println("..inside doJob");
-		isRunning = true;
+		System.out.println(new Date().toLocaleString() + "..inside doJob");
 		start_time = new Date();
-
-		while (isRunning) {
-			fetchStream();
-		}
+		fetchStream();
 	}
-
 }

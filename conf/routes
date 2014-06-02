@@ -6,10 +6,16 @@
 GET     /                                       Application.index
 
 GET     /smap/status                            Application.smapStatus
+GET     /smap/start                            Application.smapStart
+GET     /smap/stop                            Application.smapStop
+
 
 GET     /devicemap/create                       Application.createDeviceMap
 GET     /devicemap/load                         Application.loadDeviceMap
 
+GET     /{<[a-zA-Z][-a-zA-Z0-9_]{1,10}>device} Application.test
+
+GET     /{<[a-zA-Z][-a-zA-Z0-9_]{1,49}>device}/{<[a-zA-Z][-a-zA-Z0-9_]{1,49}>sensor}/{<[a-zA-Z][-a-zA-Z0-9_]{1,49}>channel} Application.test
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

@@ -21,8 +21,8 @@ import smap.*;
 public class SmapStreamList {
 
 	//private String smap_uuid_url = "http://nms.iiitd.edu.in:9101/api/query/uuid";
-	private String smap_uuid_url = "http://192.168.1.40:9101/api/query/uuid";
-	private String smap_tags_url = "http://192.168.1.40:9101/api/tags";
+	private String smap_uuid_url = "http://192.168.1.38:9106/api/query/uuid";
+	private String smap_tags_url = "http://192.168.1.38:9106/api/tags";
 	public static Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues()
 			.setPrettyPrinting().create();
 
